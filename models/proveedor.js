@@ -1,32 +1,28 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
-    iduser: {
+  return sequelize.define('proveedor', {
+    idproveedor: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    username: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: "username_UNIQUE"
-    },
-    password: {
-      type: DataTypes.STRING(100),
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING(245),
-      allowNull: false
-    },
-    email: {
+    Nombre: {
       type: DataTypes.STRING(145),
       allowNull: false
+    },
+    Telefono: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    correo: {
+      type: DataTypes.STRING(145),
+      allowNull: false,
+      unique: "correo_UNIQUE"
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'proveedor',
     timestamps: false,
     indexes: [
       {
@@ -34,15 +30,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "iduser" },
+          { name: "idproveedor" },
         ]
       },
       {
-        name: "username_UNIQUE",
+        name: "correo_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "username" },
+          { name: "correo" },
         ]
       },
     ]

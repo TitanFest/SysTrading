@@ -19,8 +19,8 @@ const { where } = require("sequelize");
  */
 async function ListaUsuarios() {
   try {
-    const usuarios = await models.users.findAll({
-      attributes: { exclude: ['password'] } // Excluir el campo password por seguridad
+    const usuarios = await models.usuario.findAll({
+      attributes: { exclude: ['password'] }
     });
     return usuarios;
   } catch (error) {
@@ -29,29 +29,18 @@ async function ListaUsuarios() {
   }
 }
 
-async function registrar(user) {
-  const passwordCifrado = await bcrypt.hash(user.password, 10);
+async function registrar(usuario) {
+  const passwordCifrado = await bcrypt.hash(usuario.Contraseña, 10);
   try {
-    const dbUser = await models.users.create({
-      ...user,
-      password: passwordCifrado,
+    const dbUser = await models.usuario.create({
+      ...usuario,
+      Contraseña: passwordCifrado,
     });
     return { mensaje: "Usuario creado exitosamente" };
   } catch (error) {
     console.log(error);
     return { mensaje: "No se pudo crear el usuario" };
   }
-
-  /*
-  const result = await db.query(
-    `INSERT INTO lenguajesprog.users (username,password) 
-    VALUES('${user.username}','${passwordCifrado}')`
-  );
-  if (!result.affectedRows) {
-    return { mensaje: "No se pudo crear el usuario" };
-  }
-  return { mensaje: "Usuario creado exitosamente" };
-*/
 }
 /**
  * Funcion para loguear el usuario en la API
@@ -60,20 +49,20 @@ async function registrar(user) {
  */
 async function login(user) {
   try {
-    const dbUser = await models.users.findOne({
+    const dbUser = await models.usuario.findOne({
       where: {
-        username: user.username,
+        Correo: user.Correo,
       },
     });
     if (!dbUser) {
       return { mensaje: "Usuario/Contraseña incorrectos" };
     }
-    let esPasswordValido = await bcrypt.compare(user.password, dbUser.password);
+    let esPasswordValido = await bcrypt.compare(user.Contraseña, dbUser.Contraseña);
     if (!esPasswordValido) {
       return { mensaje: "Usuario/Contraseña incorrectos" };
     }
     const token = jwt.sign(
-      { userId: dbUser.userId, userName: dbUser.userName },
+      { idUsuario: dbUser.idUsuario, Correo: dbUser.Correo },
       "secret",
       {
         expiresIn: "30m",
@@ -84,54 +73,27 @@ async function login(user) {
     console.log(error);
     return { mensaje: "Usuario/Contraseña incorrectos" };
   }
-
-  /*
-
-  const result = await db.query(
-    `SELECT iduser, username, password FROM lenguajesprog.users 
-    WHERE username = ?`,
-    [user.username]
-  );
-  const dbUser = result[0];
-  const mensaje = { mensaje: "Usuario/Contraseña incorrectos" };
-  if (!dbUser) {
-    return mensaje;
-  }
-  let esPasswordValido = bcrypt.compare(user.password, dbUser.password);
-  if (!esPasswordValido) {
-    return mensaje;
-  }
-  const token = jwt.sign(
-    { userId: dbUser.userId, userName: dbUser.userName },
-    "secret",
-    {
-      expiresIn: "30m",
-    }
-  );
-*/
-  return { token };
 }
 
 async function actualizarUsuario(id, user) {
   try {
-    if (user.password) {
-      user.password = await bcrypt.hash(user.password, 10);
+    if (user.Contraseña) {
+      user.Contraseña = await bcrypt.hash(user.Contraseña, 10);
     }
-    await models.users.update(user, {
-      where: { iduser: id }
+    await models.usuario.update(user, {
+      where: { idUsuario:  id }
     });
     return { mensaje: "Usuario actualizado exitosamente" };
   } catch (error) {
     console.log(error);
-    return { mensaje: "No se pudo actualizar el usuario" };
+    return { mensaje: "No se pudo actualizar el usuario "+error };
   }
 }
 
-// Método para eliminar un usuario
 async function eliminarUsuario(id) {
   try {
-    await models.users.destroy({
-      where: { iduser: id }
+    await models.usuario.destroy({
+      where: { idUsuario: id }
     });
     return { mensaje: "Usuario eliminado exitosamente" };
   } catch (error) {
