@@ -1,9 +1,9 @@
 const config = {
   db: {
     host: "localhost",
-    user: "admin",
-    username: "admin",
-    password: "admin",
+    user: "root",
+    username: "Admin",
+    password: "Admin",
     database: "inventory",
     connectTimeout: 60000,
   },

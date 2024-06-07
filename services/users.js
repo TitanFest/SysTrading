@@ -17,6 +17,18 @@ const { where } = require("sequelize");
  * @param {*} user objeto tiene los datos del usuario (ejem: nombre,password)
  * @returns un mensaje si el usuario ha sido creado o no
  */
+async function ListaUsuarios() {
+  try {
+    const usuarios = await models.users.findAll({
+      attributes: { exclude: ['password'] } // Excluir el campo password por seguridad
+    });
+    return usuarios;
+  } catch (error) {
+    console.log(error);
+    return { mensaje: "No se pudo obtener la lista de usuarios" };
+  }
+}
+
 async function registrar(user) {
   const passwordCifrado = await bcrypt.hash(user.password, 10);
   try {
@@ -100,7 +112,38 @@ async function login(user) {
   return { token };
 }
 
+async function actualizarUsuario(id, user) {
+  try {
+    if (user.password) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
+    await models.users.update(user, {
+      where: { iduser: id }
+    });
+    return { mensaje: "Usuario actualizado exitosamente" };
+  } catch (error) {
+    console.log(error);
+    return { mensaje: "No se pudo actualizar el usuario" };
+  }
+}
+
+// Método para eliminar un usuario
+async function eliminarUsuario(id) {
+  try {
+    await models.users.destroy({
+      where: { iduser: id }
+    });
+    return { mensaje: "Usuario eliminado exitosamente" };
+  } catch (error) {
+    console.log(error);
+    return { mensaje: "No se pudo eliminar el usuario" };
+  }
+}
+
 module.exports = {
   registrar,
   login,
+  ListaUsuarios,
+  actualizarUsuario,
+  eliminarUsuario,
 };
