@@ -1,0 +1,55 @@
+.Targeta {
+    width: 400px;
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: #fff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+  }
+  
+  .Targeta h1 {
+    text-align: center; 
+    font-size: 24px;
+    margin-bottom: 20px; 
+  }
+  
+  
+  .Imagen img {
+    width: 100px; 
+    height: auto; 
+    margin-right: 20px;
+    object-fit: cover;
+  }
+  
+  
+ 
+  .Datos {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+  }
+  
+  .Datos p {
+    font-size: 16px; 
+    margin-bottom: 10px; 
+  }
+  
+  .Btn {
+    display: block; 
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #007bff; 
+    color: #fff; 
+    text-decoration: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .Btn:hover {
+    background-color: #0056b3;
+  }
+    

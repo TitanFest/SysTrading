@@ -1,0 +1,49 @@
+.Pagina {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .Pagina h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .Bloque {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .elments-evento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+  }
+  
+  .Horario {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .local, .visitante {
+    display: flex;
+    align-items: center;
+  }
+  
+  .imagen-equipo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .vs {
+    margin: 0 10px;
+  }
+  
