@@ -3,6 +3,9 @@ const app = express();
 const port = 3000;
 const usuarioRouter = require("./routes/users");
 const ProveedorRouter = require("./routes/Proveedor");
+const RolRouter = require("./routes/Rol");
+const ProductsRouter = require("./routes/products");
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -15,6 +18,9 @@ app.get("/", (req, res) => {
 
 app.use("/usuario", usuarioRouter); //Enrutador de usuarios
 app.use("/proveedor", ProveedorRouter);
+app.use("/Rol",RolRouter);
+app.use("/Rol",RolRouter);
+app.use("/products",ProductsRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

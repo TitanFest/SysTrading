@@ -13,6 +13,7 @@ router.post("/registrar", verificarToken, async function (req, res, next) {
   }
 });
 
+
 router.get('/Obtener', async function (req, res, next) {
   try {
     res.json(await products.ListaProductos());

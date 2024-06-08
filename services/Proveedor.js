@@ -45,7 +45,7 @@ async function RegistrarProveedor(Proveedor) {
 async function actualizarProveedor(id, Proveedor) {
   try {
     await models.proveedor.update(Proveedor, {
-      where: { iduser: id }
+      where: { idproveedor: id }
     });
     return { mensaje: "Proveedor actualizado exitosamente" };
   } catch (error) {
