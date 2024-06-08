@@ -2,8 +2,8 @@ const config = {
   db: {
     host: "localhost",
     user: "root",
-    username: "Admin",
-    password: "Admin",
+    username: "root",
+    password: "Admin ",
     database: "systrading",
     connectTimeout: 60000,
   },

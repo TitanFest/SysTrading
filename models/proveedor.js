@@ -15,10 +15,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    correo: {
-      type: DataTypes.STRING(145),
-      allowNull: false,
-      unique: "correo_UNIQUE"
+    unit_price: {
+      type: DataTypes.DECIMAL(10,2),
+      allowNull: false
     }
   }, {
     sequelize,
