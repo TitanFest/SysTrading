@@ -4,7 +4,7 @@ const config = {
     user: "root",
     username: "Admin",
     password: "Admin",
-    database: "inventory",
+    database: "systrading",
     connectTimeout: 60000,
   },
   listPerPage: 10,

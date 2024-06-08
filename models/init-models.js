@@ -1,29 +1,25 @@
 var DataTypes = require("sequelize").DataTypes;
-var _order_details = require("./order_details");
-var _orders = require("./orders");
-var _products = require("./products");
-var _users = require("./users");
+var _proveedor = require("./proveedor");
+var _rol = require("./rol");
+var _rol_usuario = require("./rol_usuario");
+var _usuario = require("./usuario");
 
 function initModels(sequelize) {
-  var order_details = _order_details(sequelize, DataTypes);
-  var orders = _orders(sequelize, DataTypes);
-  var products = _products(sequelize, DataTypes);
-  var users = _users(sequelize, DataTypes);
+  var proveedor = _proveedor(sequelize, DataTypes);
+  var rol = _rol(sequelize, DataTypes);
+  var rol_usuario = _rol_usuario(sequelize, DataTypes);
+  var usuario = _usuario(sequelize, DataTypes);
 
-  orders.belongsToMany(products, { as: 'products_idproduct_products', through: order_details, foreignKey: "orders_idorder", otherKey: "products_idproduct" });
-  products.belongsToMany(orders, { as: 'orders_idorder_orders', through: order_details, foreignKey: "products_idproduct", otherKey: "orders_idorder" });
-  order_details.belongsTo(orders, { as: "orders_idorder_order", foreignKey: "orders_idorder"});
-  orders.hasMany(order_details, { as: "order_details", foreignKey: "orders_idorder"});
-  order_details.belongsTo(products, { as: "products_idproduct_product", foreignKey: "products_idproduct"});
-  products.hasMany(order_details, { as: "order_details", foreignKey: "products_idproduct"});
-  orders.belongsTo(users, { as: "users_iduser_user", foreignKey: "users_iduser"});
-  users.hasMany(orders, { as: "orders", foreignKey: "users_iduser"});
+  rol_usuario.belongsTo(rol, { as: "idRol_rol", foreignKey: "idRol"});
+  rol.hasMany(rol_usuario, { as: "rol_usuarios", foreignKey: "idRol"});
+  rol_usuario.belongsTo(usuario, { as: "idUsuario_usuario", foreignKey: "idUsuario"});
+  usuario.hasMany(rol_usuario, { as: "rol_usuarios", foreignKey: "idUsuario"});
 
   return {
-    order_details,
-    orders,
-    products,
-    users,
+    proveedor,
+    rol,
+    rol_usuario,
+    usuario,
   };
 }
 module.exports = initModels;

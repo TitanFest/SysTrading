@@ -1,10 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const programmingLanguagesRouter = require("./routes/programmingLanguages");
-const usersRouter = require("./routes/users");
-const productsRouter = require("./routes/products");
-const ordersRouter = require("./routes/orders");
+const usuarioRouter = require("./routes/users");
+const ProveedorRouter = require("./routes/Proveedor");
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -14,10 +12,10 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
-app.use("/programming-languages", programmingLanguagesRouter); //Enrutador de lenguajes de programación
-app.use("/users", usersRouter); //Enrutador de usuarios
-app.use("/products", productsRouter);
-app.use("/orders", ordersRouter); //Enrutador de usuarios
+
+app.use("/usuario", usuarioRouter); //Enrutador de usuarios
+app.use("/proveedor", ProveedorRouter);
+
 /* Error handler middleware */
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

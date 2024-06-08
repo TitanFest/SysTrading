@@ -1,19 +1,18 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('products', {
-    idproduct: {
+  return sequelize.define('proveedor', {
+    idproveedor: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING(245),
-      allowNull: false,
-      unique: "name_UNIQUE"
-    },
-    image: {
+    Nombre: {
       type: DataTypes.STRING(145),
+      allowNull: false
+    },
+    Telefono: {
+      type: DataTypes.STRING(45),
       allowNull: true
     },
     unit_price: {
@@ -22,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'products',
+    tableName: 'proveedor',
     timestamps: false,
     indexes: [
       {
@@ -30,15 +29,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "idproduct" },
+          { name: "idproveedor" },
         ]
       },
       {
-        name: "name_UNIQUE",
+        name: "correo_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "name" },
+          { name: "correo" },
         ]
       },
     ]
