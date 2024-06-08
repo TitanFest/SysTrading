@@ -3,12 +3,14 @@ var _proveedor = require("./proveedor");
 var _rol = require("./rol");
 var _rol_usuario = require("./rol_usuario");
 var _usuario = require("./usuario");
+var _products = require("./products");
 
 function initModels(sequelize) {
   var proveedor = _proveedor(sequelize, DataTypes);
   var rol = _rol(sequelize, DataTypes);
   var rol_usuario = _rol_usuario(sequelize, DataTypes);
   var usuario = _usuario(sequelize, DataTypes);
+  var products = _products(sequelize, DataTypes);
 
   rol_usuario.belongsTo(rol, { as: "idRol_rol", foreignKey: "idRol"});
   rol.hasMany(rol_usuario, { as: "rol_usuarios", foreignKey: "idRol"});
@@ -20,6 +22,7 @@ function initModels(sequelize) {
     rol,
     rol_usuario,
     usuario,
+    products,
   };
 }
 module.exports = initModels;
