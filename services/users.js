@@ -46,7 +46,6 @@ async function registrar(usuario,Rol) {
         "idUsuario": UsuarioRegistrado.dataValues.idUsuario 
       
     });
-    
     return { mensaje: "Usuario creado exitosamente" };
   } catch (error) {
     console.log(error);
