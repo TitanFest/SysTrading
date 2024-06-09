@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING(245),
       allowNull: false,
-      unique: "name_UNIQUE"
+      unique: "name"
     },
     image: {
       type: DataTypes.STRING(145),
@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     unit_price: {
       type: DataTypes.DECIMAL(20,2),
+      allowNull: false
+    },
+    cantidad: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
@@ -34,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "name_UNIQUE",
+        name: "name",
         unique: true,
         using: "BTREE",
         fields: [
@@ -44,3 +48,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+
