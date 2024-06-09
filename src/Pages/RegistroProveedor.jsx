@@ -2,8 +2,42 @@ import React from 'react';
 import NavBar from '../Components/NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Style/RegistroProveedor.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 const RegistroProveedor = () => {
+
+  const [Nombre, setNombre] = useState("");
+  const [Telefono, setTelefono] = useState("");
+  const [Correo, setCorreo] = useState("");
+  
+
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/proveedor/registrar", {
+        "Nombre": Nombre,
+		"Telefono": Telefono,
+		"correo": Correo
+      });
+      setNombre("");
+      setTelefono("");
+      setCorreo("");
+       
+      if(response.status===200){ 
+        alert("Proveedor creado correctamente")
+    }else{
+        alert("El proveedor ingresado no es valido")
+    }
+
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An error occurred during login.");
+    }
+
+  };
+
   return (
     <>
       <NavBar />
@@ -18,6 +52,8 @@ const RegistroProveedor = () => {
                 className="form-control"
                 id="nombre"
                 placeholder="Ingrese el nombre del proveedor"
+                value={Nombre}
+                onChange={(e) => setNombre(e.target.value)}
                 required
               />
             </div>
@@ -28,6 +64,8 @@ const RegistroProveedor = () => {
                 className="form-control"
                 id="telefono"
                 placeholder="Ingrese el teléfono del proveedor"
+                value={Telefono}
+                onChange={(e) => setTelefono(e.target.value)}
                 required
               />
             </div>
@@ -38,10 +76,12 @@ const RegistroProveedor = () => {
                 className="form-control"
                 id="correo"
                 placeholder="Ingrese el correo electrónico del proveedor"
+                value={Correo}
+                onChange={(e) => setCorreo(e.target.value)}
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100 mt-4">
+            <button onClick={handleLogin} type="submit" className="btn btn-primary w-100 mt-4">
               Registrar Proveedor
             </button>
           </form>
