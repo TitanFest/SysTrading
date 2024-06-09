@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const sequelize = require("./config-db");
 const initModels = require("../models/init-models");
 const models = initModels(sequelize);
+const Rol_Usuario = require("./Rol_Usuario");
 
 /**
  * usamos bcrypt para encriptar la constraseña del usuario y comparar la contraseña encriptada en BD.
@@ -22,6 +23,7 @@ async function ListaUsuarios() {
     const usuarios = await models.usuario.findAll({
       attributes: { exclude: ['password'] }
     });
+    console.log(usuarios)
     return usuarios;
   } catch (error) {
     console.log(error);
@@ -29,13 +31,22 @@ async function ListaUsuarios() {
   }
 }
 
-async function registrar(usuario) {
+async function registrar(usuario,Rol) {
   const passwordCifrado = await bcrypt.hash(usuario.Contraseña, 10);
   try {
     const dbUser = await models.usuario.create({
       ...usuario,
       Contraseña: passwordCifrado,
     });
+    const UsuarioRegistrado = await BuscarPorCedula(usuario.Cedula)
+    
+    Rol_Usuario.RegistrarRoles_Usuario({
+      
+        "idRol": Rol,
+        "idUsuario": UsuarioRegistrado.dataValues.idUsuario 
+      
+    });
+    
     return { mensaje: "Usuario creado exitosamente" };
   } catch (error) {
     console.log(error);
@@ -99,6 +110,18 @@ async function eliminarUsuario(id) {
   } catch (error) {
     console.log(error);
     return { mensaje: "No se pudo eliminar el usuario" };
+  }
+}
+
+async function BuscarPorCedula(cedula) {
+  try {
+    const usuarios = await models.usuario.findOne({
+      where : {Cedula : cedula}
+    });
+    return usuarios;
+  } catch (error) {
+    console.log(error);
+    return { mensaje: "No se pudo obtener la lista de usuarios" };
   }
 }
 

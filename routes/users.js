@@ -12,9 +12,10 @@ router.get('/Obtener', async function (req, res, next) {
   }
 });
 
-router.post("/registrar", async function (req, res, next) {
+router.post("/registrar/:Rol", async function (req, res, next) {
   try {
-    res.json(await usuario.registrar(req.body));
+    res.json(await usuario.registrar(req.body,req.params.Rol));
+
   } catch (err) {
     console.error(`Error no se puede crear usuario`, err.message);
     next(err);
