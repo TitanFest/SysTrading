@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 8080;
 const usuarioRouter = require("./routes/users");
 const ProveedorRouter = require("./routes/Proveedor");
 const RolRouter = require("./routes/Rol");
 const ProductsRouter = require("./routes/products");
 const pedidoRouter = require("./routes/pedidoRoutes");
 const RolUserRouter = require("./routes/Rol_Usuario");
+const cors = require('cors');
 
 app.use(express.json());
 app.use(
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
+app.use(cors());
 app.use("/usuario", usuarioRouter); //Enrutador de usuarios
 app.use("/proveedor", ProveedorRouter);
 app.use("/Rol",RolRouter);
