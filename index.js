@@ -5,6 +5,7 @@ const usuarioRouter = require("./routes/users");
 const ProveedorRouter = require("./routes/Proveedor");
 const RolRouter = require("./routes/Rol");
 const ProductsRouter = require("./routes/products");
+const pedidoRouter = require("./routes/pedidoRoutes");
 
 app.use(express.json());
 app.use(
@@ -21,6 +22,7 @@ app.use("/proveedor", ProveedorRouter);
 app.use("/Rol",RolRouter);
 app.use("/Rol",RolRouter);
 app.use("/products",ProductsRouter);
+app.use("/pedido",pedidoRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
