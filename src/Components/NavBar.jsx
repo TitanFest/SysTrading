@@ -9,12 +9,21 @@ const NavBar = () => {
         <li><Link to="/Principal">Inicio</Link></li>
 
         {/*Barra desplegable*/}
-        <li className="registro-dropdown">
+        <li className="dropdown">
           <Link to="#">Registro</Link>
           <ul className="dropdown-content">
             <li><Link to="/RegistroUsuario">Usuarios</Link></li>
             <li><Link to="/RegistroProducto">Productos</Link></li>
             <li><Link to="/RegistroProveedor">Proveedor</Link></li>
+          </ul>
+        </li>
+
+        <li className="dropdown">
+          <Link to="#">Ver</Link>
+          <ul className="dropdown-content">
+            <li><Link to="/VerUsuarios">Usuarios</Link></li>
+            <li><Link to="/VerProductos">Productos</Link></li>
+            <li><Link to="/VerProveedor">Proveedor</Link></li>
           </ul>
         </li>
 

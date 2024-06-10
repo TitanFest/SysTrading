@@ -5,6 +5,7 @@ nav {
   display: flex;
   justify-content: center;
   padding: 20px 20px;
+  z-index: 1000;
 }
 
 ul {
@@ -36,7 +37,7 @@ a:hover {
 }
 
 
-.registro-dropdown {
+.dropdown {
   cursor: pointer; 
 }
 
@@ -51,7 +52,7 @@ a:hover {
   padding: 20px; 
 }
 
-.registro-dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
